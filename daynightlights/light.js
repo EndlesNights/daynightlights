@@ -114,7 +114,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 		
 		message = `
 		<div class="form-group"> 
-			<label>Dynamic Light:</label>
+			<label>Dynamic Day/Night Light</label>
 			<select name="flags.daynightlights.lightsData.dynamicLight">
 				<option value=true >True</option>
 				<option value=false >False</option>			
@@ -206,7 +206,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 		
 		message = 	`
 		<div class="form-group"> 
-			<label>Dynamic Light</label>
+			<label>Dynamic Day/Night Light</label>
 			<select name="flags.daynightlights.lightsData.dynamicLight">
 				<option value=false >False</option>
 				<option value=true >True</option>		
