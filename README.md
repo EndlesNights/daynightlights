@@ -2,7 +2,7 @@
 ## daynightlights
 
 * **Author**: EndlesNights#9000
-* **Version**: 1.0.0
+* **Version**: 1.0.1
 * **Foundry VTT Compatibility**: 0.6.0 to 0.6.4
 * **System Compatibility**: Universal
 
@@ -24,6 +24,10 @@ Extract the query.zip file to the public/modules directory. Use the `Manage Modu
 
 
 ## Change Log
+
+**Version 1.0.1**
+
+Changed a Light Source Conidguation Propery name from "Dynamic Light" To "Dynamic Day/Night Light"
 
 **Version 1.0.0**
 
