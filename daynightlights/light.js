@@ -36,8 +36,8 @@ async function changeLighting(){
 					
 						dynamicLight: true,
 						t: l.t.valueOf(),
-						x: l.x.valueOf(),
-						y: l.y.valueOf(),
+						x: l.flags.daynightlights.lightsData.x != null ? l.x.valueOf() : null,
+						y: l.flags.daynightlights.lightsData.y != null ? l.y.valueOf() : null,
 						dim: l.dim.valueOf(),
 						bright: l.bright.valueOf(),
 						angle: l.angle.valueOf(),
@@ -142,12 +142,12 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 
 		<div class="form-group">
 			<label>X-Position <span class="units">(Pixels)</span>:</label>
-			<input type="text" name="flags.daynightlights.lightsData.x" placeholder="X" value=${thisLight.x != null ? thisLight.x : app.object.data.x} data-dtype="Number">
+			<input type="text" name="flags.daynightlights.lightsData.x" placeholder="Current-X" value=${thisLight.x == null ? "Current-X" : thisLight.x} data-dtype="Number">
 		</div>
 		
 		<div class="form-group">
 			<label>Y-Position <span class="units">(Pixels)</span>:</label>
-			<input type="text" name="flags.daynightlights.lightsData.y" placeholder="Y" value=${thisLight.y != null ? thisLight.y : app.object.data.y} data-dtype="Number">
+			<input type="text" name="flags.daynightlights.lightsData.y" placeholder="Current-Y" value=${thisLight.y == null ? "Current-Y" : thisLight.y} data-dtype="Number">
 		</div>
 
 		<div class="form-group">
@@ -173,7 +173,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 		<div class="form-group">
 			<label>Light Color</label>
 			<input class="color" type="text" name="flags.daynightlights.lightsData.tintColor" data-dtype="String" value=${thisLight.tintColor != null ? thisLight.tintColor : app.object.data.tintColor} >
-			<input type="color" value=${thisLight.tintColor != null ? thisLight.tintColor : app.object.data.tintColor} data-edit="flags.daynightlights.lightsData.tintColor">
+			<input type="color" value="" data-edit="flags.daynightlights.lightsData.tintColor">
 		</div>
 
 		<div class="form-group">
