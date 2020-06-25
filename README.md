@@ -25,6 +25,11 @@ Extract the query.zip file to the public/modules directory. Use the `Manage Modu
 
 ## Change Log
 
+**Version 1.0.2**
+
+Users can now set the alternative X/Y coordinates to a null value and it will contumely use the current X/Y cordnates without overwriting them when the lights change.
+Fixed issue so the color picking for Alternative Light now works properly again.
+
 **Version 1.0.1**
 
 Changed a Light Source Conidguation Propery name from "Dynamic Light" To "Dynamic Day/Night Light"
