@@ -2,7 +2,7 @@
 ## daynightlights
 
 * **Author**: EndlesNights#9000
-* **Version**: 1.0.1
+* **Version**: 1.0.2
 * **Foundry VTT Compatibility**: 0.6.0 to 0.6.4
 * **System Compatibility**: Universal
 
