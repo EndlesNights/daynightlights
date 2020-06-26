@@ -2,7 +2,7 @@
 ## daynightlights
 
 * **Author**: EndlesNights#9000
-* **Version**: 1.0.2
+* **Version**: 1.0.3
 * **Foundry VTT Compatibility**: 0.6.0 to 0.6.4
 * **System Compatibility**: Universal
 
@@ -25,10 +25,15 @@ Extract the query.zip file to the public/modules directory. Use the `Manage Modu
 
 ## Change Log
 
+**Version 1.0.3**
+
+Fixed Color picker, it should now work properly.
+Users can now use many of the current light options for the alternative light by leaving the text fields empty.
+
 **Version 1.0.2**
 
 Users can now set the alternative X/Y coordinates to a null value and it will contumely use the current X/Y cordnates without overwriting them when the lights change.
-Fixed issue so the color picking for Alternative Light now works properly again.
+Fixed issue so the color picking for Alternative Light now works properly again. (turns out not quite woops)
 
 **Version 1.0.1**
 
