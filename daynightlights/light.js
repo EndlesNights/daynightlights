@@ -10,12 +10,12 @@ Hooks.on("preUpdateScene", async (entity, data, update, userID) => {
 	{
 		if(entity.data.darkness < 0.5 && data.darkness > 0.5)
 		{
-			console.log("To Darkness");
+			//console.log("To Darkness");
 			changeLighting();
 		}
 		if(entity.data.darkness > 0.5 && data.darkness < 0.5)
 		{
-			console.log("To Daylight");
+			//console.log("To Daylight");
 			changeLighting();
 		}		
 	}
@@ -27,23 +27,21 @@ async function changeLighting(){
 	canvas.lighting.updateMany(canvas.scene.data.lights.map(l => {
 		
 		if(l.flags.daynightlights  && (l.flags.daynightlights.lightsData.dynamicLight == true || l.flags.daynightlights.lightsData.dynamicLight == "true"))
-		{
-
-
+		{			
 			let newFlag = {
 				daynightlights: {
 					lightsData: {
 					
 						dynamicLight: true,
-						t: l.t.valueOf(),
+						t: l.flags.daynightlights.lightsData.t == "c" ? "c" : l.t.valueOf(),
 						x: l.flags.daynightlights.lightsData.x != null ? l.x.valueOf() : null,
 						y: l.flags.daynightlights.lightsData.y != null ? l.y.valueOf() : null,
-						dim: l.dim.valueOf(),
-						bright: l.bright.valueOf(),
-						angle: l.angle.valueOf(),
-						rotation: l.rotation.valueOf(),
-						tintAlpha: l.tintAlpha.valueOf(),
-						darknessThreshold: l.darknessThreshold.valueOf(),
+						dim: l.flags.daynightlights.lightsData.dim != null ? l.dim.valueOf() : null, //l.dim.valueOf(),
+						bright: l.flags.daynightlights.lightsData.bright != null ? l.bright.valueOf() : null, //l.bright.valueOf(),
+						angle: l.flags.daynightlights.lightsData.angle != null ? l.angle.valueOf() : null, //angle: l.angle.valueOf(),
+						rotation: l.flags.daynightlights.lightsData.rotation != null ? l.rotation.valueOf() : null, //rotation: l.rotation.valueOf(),
+						tintAlpha: l.flags.daynightlights.lightsData.tintAlpha != null ? l.tintAlpha.valueOf() : null, // l.tintAlpha.valueOf(),
+						darknessThreshold: l.flags.daynightlights.lightsData.darknessThreshold != null ? l.darknessThreshold.valueOf() : null, //l.darknessThreshold.valueOf(),
 						locked: false,
 						tintColor: l.tintColor.valueOf()
 					}
@@ -53,7 +51,7 @@ async function changeLighting(){
 			let lightsData = l.flags.daynightlights.lightsData;
 			
 			return {_id: l._id,
-				t: lightsData.t != null ? lightsData.t : l.t,
+				t: lightsData.t != "c" ? lightsData.t : l.t,
 				x: lightsData.x != null ? lightsData.x : l.x,
 				y: lightsData.y != null ? lightsData.y : l.y,
 				dim: lightsData.dim != null ? lightsData.dim : l.dim,
@@ -74,7 +72,6 @@ async function changeLighting(){
 }
 
 Hooks.on("renderLightConfig", (app, html, data) => {
-	console.log(app.object.data);
 	
 	let thisLight;
 	if(app.object.getFlag("daynightlights", "lightsData") == null)
@@ -83,7 +80,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 		thisLight =
 		{
 			dynamicLight: false,
-			t: null,
+			t: "c",
 			x: null,
 			y: null,
 			dim: null,
@@ -93,7 +90,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 			tintAlpha: null,
 			darknessThreshold: null,
 			locked: false,
-			tintColor: null
+			tintColor: ""
 		};
 		app.object.setFlag("daynightlights", "lightsData", thisLight);
 	}
@@ -107,6 +104,7 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 	
 	if(thisLight.dynamicLight == true || thisLight.dynamicLight == "true")
 	{
+		
 		app.setPosition({
 			height: 835,
 			width: 400
@@ -135,8 +133,10 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 		<div class="form-group">
 			<label>Light Type</label>
 			<select name="flags.daynightlights.lightsData.t" data-dtype="String">
-				<option value=${thisLight.t == "l" ? "l" : "g"}> ${thisLight.t == "l" ? "Local" : "Global"}</option>
-				<option value=${thisLight.t == "l" ? "g" : "l"}> ${thisLight.t == "l" ? "Global" : "Local"}</option>
+				<option value="${thisLight.t == "c" ? "c" : thisLight.t }">${thisLight.t == "c" ? "Current Light" : thisLight.t == "l" ? "Local" : "Global"}</option>
+				<option value="c">Current Light</option>
+				<option value="l">Local</option>
+				<option value="g">Global</option>
 			</select>
 		</div>
 
@@ -152,12 +152,12 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 
 		<div class="form-group">
 			<label>Dim Radius <span class="units">(Grid Units)</span>:</label>
-			<input type="text" name="flags.daynightlights.lightsData.dim" placeholder="dim" value=${thisLight.dim != null ? thisLight.dim : app.object.data.dim} data-dtype="Number">
+			<input type="text" name="flags.daynightlights.lightsData.dim" placeholder="Current-Dim" value=${thisLight.dim == null ? "Current-Dim" : thisLight.dim} data-dtype="Number">
 		</div>
 
 		<div class="form-group">
 			<label>Bright Radius <span class="units">(Grid Units)</span>:</label>
-			<input type="text" name="flags.daynightlights.lightsData.bright" placeholder="Grid Units" value=${thisLight.bright != null ? thisLight.bright : app.object.data.bright} data-dtype="Number">
+			<input type="text" name="flags.daynightlights.lightsData.bright" placeholder="Grid Units" value=${thisLight.bright == null ? "Current-Bright-Radius" : thisLight.bright} data-dtype="Number">
 		</div>
 
 		<div class="form-group">
@@ -167,13 +167,13 @@ Hooks.on("renderLightConfig", (app, html, data) => {
 
 		<div class="form-group">
 			<label>Rotation <span class="units">(Degrees)</span>:</label>
-			<input type="text" name="flags.daynightlights.lightsData.rotation" value=${thisLight.rotation != null ? thisLight.rotation : app.object.data.rotation} data-dtype="Number">
+			<input type="text" name="flags.daynightlights.lightsData.rotation" placeholder="Current-Rotation" value=${thisLight.rotation == null ? "Current-Rotation" : thisLight.rotation} data-dtype="Number">
 		</div>
 		
 		<div class="form-group">
 			<label>Light Color</label>
-			<input class="color" type="text" name="flags.daynightlights.lightsData.tintColor" data-dtype="String" value=${thisLight.tintColor != null ? thisLight.tintColor : app.object.data.tintColor} >
-			<input type="color" value="" data-edit="flags.daynightlights.lightsData.tintColor">
+			<input class="color" type="text" name="flags.daynightlights.lightsData.tintColor" value="${thisLight.tintColor}" data-dtype="String" >
+			<input type="color" value="${thisLight.tintColor}" data-edit="flags.daynightlights.lightsData.tintColor">
 		</div>
 
 		<div class="form-group">

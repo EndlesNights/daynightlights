@@ -2,7 +2,7 @@
 	"name": "daynightlights",
 	"title": "Day Night Lights",
 	"description": "A controller for adding a secondary light options that will automatically update to when changing between day & night lighting conditions.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "EndlesNights#9000",
 	"minimumCoreVersion": "0.6.0",
 	"compatibleCoreVersion": "0.6.4",
