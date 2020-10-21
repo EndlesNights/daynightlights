@@ -1,9 +1,9 @@
-![](https://img.shields.io/badge/Foundry-v0.6.4-informational)
-## daynightlights
+![](https://img.shields.io/badge/Foundry-v0.6.6-informational)
+## Daynightlights
 
 * **Author**: EndlesNights#9000
 * **Version**: 1.0.3
-* **Foundry VTT Compatibility**: 0.6.0 to 0.6.4
+* **Foundry VTT Compatibility**: 0.6.0 to 0.6.6
 * **System Compatibility**: Universal
 
 ### Link(s) to Module
@@ -11,6 +11,7 @@
 
 ### Description
 Day Night Lights module for Foundry VTT - A controller for adding a secondary light options that will automatically update to when changing between day &amp; night lighting conditions.
+Deveoplment and support for this modual have come to an end, as of Foundry 0.7.X, the core software now possess a feature that this mod was providing.
 
 ## Installation
 ### Method 1
